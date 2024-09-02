@@ -32,17 +32,34 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/cyan-orange.css",
+              "src/styles.scss",
+              "node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "prerender": false,
+            "ssr": false
           },
           "configurations": {
-            "production": {
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "outputHashing": "none",
+              "budgets": [],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
+            },
+            "homologation": {
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": true,
+              "outputHashing": "all",
               "budgets": [
                 {
                   "type": "initial",
@@ -55,12 +72,36 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homologation.ts"
+                }
+              ]
             },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "outputHashing": "all",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -73,6 +114,9 @@
             },
             "development": {
               "buildTarget": "basic-front:build:development"
+            },
+            "homologation": {
+              "buildTarget": "basic-front:build:homologation"
             }
           },
           "defaultConfiguration": "development"
@@ -96,12 +140,17 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/cyan-orange.css",
+              "src/styles.scss",
+              "node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "44361b33-9c1c-440f-9958-9e480e3ffcd1"
   }
 }

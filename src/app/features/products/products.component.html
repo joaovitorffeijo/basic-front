@@ -1,0 +1,71 @@
+<div class="product-container">
+  <div class="header-controls">
+    <div class="right">
+      <button mat-raised-button (click)="openCreateModal()">+ Product</button>
+    </div>
+    <div class="left">
+      <button mat-raised-button style="background-color: red;" (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="!loading">
+    <table mat-table [dataSource]="dataSource" matSort >
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="supplier">
+        <th mat-header-cell *matHeaderCellDef> Supplier </th>
+        <td mat-cell *matCellDef="let product"> {{product.supplier.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> Created At </th>
+        <td mat-cell *matCellDef="let product"> {{product.createdAt | dateFormat:'short'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="modifiedAt">
+        <th mat-header-cell *matHeaderCellDef> Modified At </th>
+        <td mat-cell *matCellDef="let product"> {{product.modifiedAt | dateFormat:'short'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let product">
+          <button mat-button (click)="openEditModal(product)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button type="button" (click)="openDeleteDialog(product)">
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    <mat-paginator 
+      [length]="totalElements"
+      [pageIndex]="page"
+      [pageSize]="size"
+      [pageSizeOptions]="[5, 10, 20, 40]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+  <div *ngIf="loading" class="loader-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</div>

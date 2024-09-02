@@ -1,0 +1,36 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <form class="login-form" [formGroup]="formLogin!">
+      <h3>LOGIN</h3>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome de usuário</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput placeholder="Nome de usuário" formControlName="login">
+          <mat-error *ngIf="formLogin!.controls['login'].touched && formLogin!.controls['login'].errors?.['required']">
+            Nome de usuário é obrigatório
+          </mat-error>
+          <mat-error *ngIf="formLogin!.controls['login'].touched && formLogin!.controls['login'].errors?.['login']">
+            Nome de usuário inválido
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Senha" formControlName="password" (keyup.enter)="login()">
+          <button mat-icon-button matSuffix (click)="changeShowPasswordValue()" type="button">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="formLogin!.controls['password'].touched && formLogin!.controls['password'].errors?.['required']">
+            Senha é obrigatória
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button mat-raised-button color="primary" (click)="login()">Sign In</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

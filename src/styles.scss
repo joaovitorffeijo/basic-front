@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.swal-custom {
+  .swal2-container {
+    background-color: #191c1c !important; 
+  }
+
+  .swal2-popup {
+    background-color: #2d2d2d !important; 
+    border-radius: 10px !important; 
+  }
+
+  .swal2-title {
+    color: #ffffff !important;
+  }
+
+  .swal2-content {
+    color: #dcdcdc !important; 
+  }
+
+  .swal2-confirm {
+    background-color: #00ffff85 !important;
+    color: #000000 !important; 
+    border: none !important;
+    border-radius: 5px !important; 
+  }
+
+  .swal2-cancel {
+    background-color: #ff4d4d !important; 
+    color: #ffffff !important; 
+    border: none !important;
+    border-radius: 5px !important; 
+  }
+}
